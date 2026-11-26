@@ -1,19 +1,23 @@
-@extends('layouts.app')
+<x-app-layout>
+    <div class="py-8">
+        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 space-y-4">
 
-@section('title', 'Tambah Pasien')
+            <div class="border-l-4 border-teal-700 pl-4">
+                <h2 class="text-2xl font-bold text-gray-900">🪪 Form Pendaftaran Pasien</h2>
+                <p class="text-gray-500">Isi data profil pasien, nomor rekam medis, domisili, dan kontak darurat.</p>
+            </div>
 
-@section('content')
-    <div class="page-header mb-4">
-        <h2 class="fw-bold mb-1"><i class="bi bi-person-vcard"></i> Form Pendaftaran Pasien</h2>
-        <p class="text-muted mb-0">Isi data profil pasien, nomor rekam medis, domisili, dan kontak darurat.</p>
-    </div>
+            <form action="{{ route('pasien.store') }}" method="POST" class="bg-white rounded-md shadow-sm overflow-hidden">
+                @csrf
 
-    <form action="{{ route('pasien.store') }}" method="POST" class="card shadow-sm">
-        @csrf
-        @include('pasien._form')
-        <div class="card-footer bg-white d-flex justify-content-end gap-2 p-3">
-            <a href="{{ route('pasien.index') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Batal</a>
-            <button type="submit" class="btn btn-modul"><i class="bi bi-save"></i> Simpan Pasien</button>
+                @include('pasien._form')
+
+                <div class="flex justify-end gap-3 px-6 py-4 bg-gray-50 border-t">
+                    <button type="reset" class="px-4 py-2 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100">Reset</button>
+                    <button type="submit" class="px-4 py-2 rounded-md bg-teal-700 hover:bg-teal-800 text-white shadow">Simpan Pasien</button>
+                </div>
+            </form>
+
         </div>
-    </form>
-@endsection
+    </div>
+</x-app-layout>

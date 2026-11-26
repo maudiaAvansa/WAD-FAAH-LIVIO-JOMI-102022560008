@@ -8,9 +8,14 @@ use Illuminate\Validation\Rule;
 
 class PasienController extends Controller
 {
-    // READ: tampilkan semua pasien
-    public function index()
+    // READ: pasien langsung dapat form tambah.
+    // Admin, dokter, perawat dapat daftar, atau form tambah kalau ada ?tambah=1
+    public function index(Request $request)
     {
+        if (auth()->user()->role === 'patient' || $request->has('tambah')) {
+            return view('pasien.create');
+        }
+
         $pasiens = Pasien::orderBy('id')->get();
         return view('pasien.index', compact('pasiens'));
     }
